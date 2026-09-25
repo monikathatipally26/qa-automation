@@ -19,15 +19,14 @@ public class FirstFoodDiaryTest {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
-
     @Test
-    public void openGoogleTest() {
-        driver.get("https://google.com");
+    public void testUSDAfoodSearch()throws InterruptedException {
+        driver.get("https://fdc.nal.usda.gov/food-search");
+        Thread.sleep(3000); // wait 3 seconds
         String title = driver.getTitle();
-        System.out.println("Page title is: " + title);
-        Assert.assertTrue(title.contains("Google"));
+        System.out.println("USDA Page title: " + title);
+        Assert.assertTrue(title.contains("FoodData"));
     }
-
     @AfterMethod
     public void teardown() {
         driver.quit();
