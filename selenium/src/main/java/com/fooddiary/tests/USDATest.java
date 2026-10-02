@@ -1,0 +1,42 @@
+package com.fooddiary.tests;
+
+import com.fooddiary.pages.USDAPage;
+import com.fooddiary.utils.DriverManager;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class USDATest {
+
+    WebDriver driver;
+    USDAPage usdaPage;
+
+    @BeforeMethod
+    public void setup() {
+        driver = DriverManager.getDriver();
+        usdaPage = new USDAPage(driver);
+    }
+
+    @Test
+    public void verifyUSDAPageTitle() {
+        usdaPage.goToUSDAPage();
+        String title = usdaPage.getPageTitle();
+        System.out.println("Page title: " + title);
+        Assert.assertTrue(title.contains("FoodData"));
+    }
+
+    @Test
+    public void searchForFood() throws InterruptedException {
+        usdaPage.goToUSDAPage();
+        usdaPage.searchFood("banana");
+        Thread.sleep(3000);
+        System.out.println("Searched for banana successfully!");
+    }
+
+    @AfterMethod
+    public void teardown() {
+        DriverManager.quitDriver();
+    }
+}
