@@ -1,6 +1,7 @@
 package com.fooddiary.tests;
 
 import com.fooddiary.pages.USDAPage;
+import com.fooddiary.utils.BaseTest;
 import com.fooddiary.utils.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -8,14 +9,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class USDATest {
+public class USDATest extends BaseTest {
 
-    WebDriver driver;
     USDAPage usdaPage;
 
     @BeforeMethod
-    public void setup() {
-        driver = DriverManager.getDriver();
+    public void setUp() {
+        super.setUp();
         usdaPage = new USDAPage(driver);
     }
 
@@ -28,14 +28,9 @@ public class USDATest {
     }
 
     @Test
-    public void searchForFood() throws InterruptedException {
+    public void searchForFood() {
         usdaPage.goToUSDAPage();
         usdaPage.searchFoodWithWait("banana");
-        System.out.println("Searched for banana successfully!");
-    }
-
-    @AfterMethod
-    public void teardown() {
-        DriverManager.quitDriver();
+        System.out.println("Searched for banana!");
     }
 }
