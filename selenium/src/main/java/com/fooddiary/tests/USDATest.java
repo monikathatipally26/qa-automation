@@ -30,8 +30,7 @@ public class USDATest {
     @Test
     public void searchForFood() throws InterruptedException {
         usdaPage.goToUSDAPage();
-        usdaPage.searchFood("banana");
-        Thread.sleep(3000);
+        usdaPage.searchFoodWithWait("banana");
         System.out.println("Searched for banana successfully!");
     }
 
