@@ -25,6 +25,7 @@ public class USDATest extends BaseTest {
         String title = usdaPage.getPageTitle();
         System.out.println("Page title: " + title);
         Assert.assertTrue(title.contains("FoodData"));
+        // Assert.assertTrue(title.contains("WRONG")); // to test screenshot
     }
 
     @Test
