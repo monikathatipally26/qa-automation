@@ -1,5 +1,6 @@
 package com.fooddiary.api;
 
+import com.fooddiary.utils.ConfigReader;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -8,9 +9,13 @@ import org.testng.annotations.DataProvider;
 
 public class USDAApiTest {
 
+    //private static final String BASE_URL = ConfigReader.get("api.base.url");
     private static final String BASE_URL = "https://api.nal.usda.gov/fdc/v1";
-    private static final String API_KEY = "UXSjg4Txjv2FFYsLukanqxNEcJhSHLHXOXkzzboN";
 
+    private static final String API_KEY = ConfigReader.get("api.key");
+
+   // private static final String API_KEY = "UXSjg4Txjv2FFYsLukanqxNEcJhSHLHXOXkzzboN";
+    //System.out.println("API KEY: " +API_KEY);
     @Test
     public void testFoodSearchReturns200() {
         Response response = RestAssured

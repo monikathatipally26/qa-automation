@@ -1,4 +1,5 @@
 package com.fooddiary.pages;
+import com.fooddiary.utils.ConfigReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,7 +21,9 @@ public class USDAPage {
 
     // Actions
     public void goToUSDAPage() {
-        driver.get("https://fdc.nal.usda.gov/food-search");
+       // driver.get("https://fdc.nal.usda.gov/food-search");
+        driver.get(ConfigReader.get("base.url") + "/food-search");
+
     }
 
     public void searchFood(String foodName) {
