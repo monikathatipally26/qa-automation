@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.annotations.DataProvider;
 
 public class USDAApiTest {
 
@@ -44,5 +45,36 @@ public class USDAApiTest {
 
         System.out.println("Status: " + response.getStatusCode());
         Assert.assertEquals(response.getStatusCode(), 403);
+
+
+    }
+
+    @DataProvider(name = "foodSearchData")
+    public Object[][] getFoodData() {
+        return new Object[][] {
+                {"banana"},
+                {"apple"},
+                {"oats"},
+                {"chicken"}
+        };
+    }
+
+    @Test(dataProvider = "foodSearchData")
+    public void testMultipleFoodSearches(String foodName) {
+        Response response = RestAssured
+                .given()
+                .baseUri(BASE_URL)
+                .queryParam("api_key", API_KEY)
+                .queryParam("query", foodName)
+                .when()
+                .get("/foods/search")
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+
+        System.out.println("Food: " + foodName +
+                " | Status: " + response.getStatusCode());
+        Assert.assertEquals(response.getStatusCode(), 200);
     }
 }

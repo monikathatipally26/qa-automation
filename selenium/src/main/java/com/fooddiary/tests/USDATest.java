@@ -33,5 +33,6 @@ public class USDATest extends BaseTest {
         usdaPage.goToUSDAPage();
         usdaPage.searchFoodWithWait("banana");
         System.out.println("Searched for banana!");
+
     }
 }
