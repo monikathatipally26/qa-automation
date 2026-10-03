@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.9.3.dtd">
+<suite name="FoodDiary Test Suite" parallel="none">
+
+    <test name="USDA UI Tests">
+        <classes>
+            <class name="com.fooddiary.tests.USDATest"/>
+        </classes>
+    </test>
+
+    <test name="USDA API Tests">
+        <classes>
+            <class name="com.fooddiary.api.USDAApiTest"/>
+        </classes>
+    </test>
+
+</suite>
