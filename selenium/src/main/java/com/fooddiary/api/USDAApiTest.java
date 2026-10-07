@@ -81,5 +81,49 @@ public class USDAApiTest {
         System.out.println("Food: " + foodName +
                 " | Status: " + response.getStatusCode());
         Assert.assertEquals(response.getStatusCode(), 200);
+
+
+    }
+    @Test
+    public void testGetFoodById() {
+        Response response = RestAssured
+                .given()
+                .baseUri(BASE_URL)
+                .queryParam("api_key", API_KEY)
+                .when()
+                .get("/food/2262074")
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+
+        System.out.println("Food ID response: " +
+                response.jsonPath().getString("description"));
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
+
+    @Test
+    public void testPostFoodSearch() {
+        String requestBody = "{\n" +
+                "  \"query\": \"oats\",\n" +
+                "  \"pageSize\": 5\n" +
+                "}";
+
+        Response response = RestAssured
+                .given()
+                .baseUri(BASE_URL)
+                .queryParam("api_key", API_KEY)
+                .header("Content-Type", "application/json")
+                .body(requestBody)
+                .when()
+                .post("/foods/search")
+                .then()
+                .statusCode(200)
+                .extract()
+                .response();
+
+        System.out.println("POST search results: " +
+                response.jsonPath().getString("foods[0].description"));
+        Assert.assertEquals(response.getStatusCode(), 200);
     }
 }
