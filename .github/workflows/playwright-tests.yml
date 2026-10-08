@@ -33,7 +33,7 @@ jobs:
       - name: Run Playwright tests
         run: |
           cd playwright
-          npx playwright test
+          npx playwright test --reporter=html
 
       - name: List files
         if: always()
