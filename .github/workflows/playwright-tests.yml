@@ -34,6 +34,12 @@ jobs:
         run: |
           cd playwright
           npx playwright test
+
+      - name: List files
+        if: always()
+        run: |
+          ls -la playwright/
+          ls -la playwright/playwright-report/ || echo "playwright-report folder not found"
       
       - name: Upload Playwright Report
         if: always()
